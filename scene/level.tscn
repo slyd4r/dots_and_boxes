@@ -77,6 +77,7 @@ text = "home"
 
 [node name="score" type="Node2D" parent="."]
 pause_mode = 2
+visible = false
 z_index = 10
 script = ExtResource( 4 )
 
