@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://script/level.gd" type="Script" id=1]
+[ext_resource path="res://scene/tile.tres" type="TileSet" id=2]
+[ext_resource path="res://sprites/square.png" type="Texture" id=3]
+[ext_resource path="res://script/score.gd" type="Script" id=4]
+
+[node name="level" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+visible = false
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 60, 60 )
+cell_custom_transform = Transform2D( 100, 0, 0, 100, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -196610, -1610612735, 0, -196609, -1610612736, 0, -262144, -1610612735, 0, -262143, -1610612736, 0, -262142, -1610612735, 0, -131074, -2147483648, 0, -131073, -2147483646, 0, -196608, -2147483648, 0, -196607, -2147483646, 0, -196606, -2147483648, 0, -65538, -1610612735, 0, -65537, -1610612736, 0, -131072, -1610612735, 0, -131071, -1610612736, 0, -131070, -1610612735, 0, -2, -2147483648, 0, -1, -2147483646, 0, -65536, -2147483648, 0, -65535, -2147483646, 0, -65534, -2147483648, 0, 65534, -1610612735, 0, 65535, -1610612736, 0, 0, -1610612735, 0, 1, -1610612736, 0, 2, -1610612735, 0, 131070, -2147483648, 0, 131071, -2147483646, 0, 65536, -2147483648, 0, 65537, -2147483646, 0, 65538, -2147483648, 0, 196606, -1610612735, 0, 196607, -1610612736, 0, 131072, -1610612735, 0, 131073, -1610612736, 0, 131074, -1610612735, 0 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 30, 0 )
+current = true
+
+[node name="background" type="Node2D" parent="."]
+position = Vector2( 0, -20.2112 )
+
+[node name="player1" type="Sprite" parent="background"]
+self_modulate = Color( 0, 0.552941, 1, 1 )
+position = Vector2( -36.4935, -287.188 )
+scale = Vector2( 1.4, 1.4 )
+texture = ExtResource( 3 )
+
+[node name="name" type="Label" parent="background/player1"]
+margin_left = -14.0
+margin_top = -25.0
+margin_right = 2.0
+margin_bottom = -11.0
+rect_scale = Vector2( 2, 2 )
+text = "p1"
+
+[node name="label" type="Label" parent="background/player1"]
+margin_left = -11.0629
+margin_top = 5.15833
+margin_right = 64.9371
+margin_bottom = 63.1583
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="player2" type="Sprite" parent="background"]
+self_modulate = Color( 0.901961, 0.12549, 0.309804, 1 )
+position = Vector2( 98.3738, -287.188 )
+texture = ExtResource( 3 )
+
+[node name="name" type="Label" parent="background/player2"]
+margin_left = -25.6272
+margin_top = -29.7774
+margin_right = -1.6272
+margin_bottom = -15.7774
+rect_scale = Vector2( 2, 2 )
+text = "p2"
+align = 1
+valign = 1
+
+[node name="label" type="Label" parent="background/player2"]
+margin_left = -11.61
+margin_top = 1.1225
+margin_right = 2.39001
+margin_bottom = 15.1225
+rect_scale = Vector2( 2, 2 )
+text = "0"
+
+[node name="home" type="Button" parent="background"]
+margin_left = -33.0
+margin_top = 307.0
+margin_right = 111.0
+margin_bottom = 350.0
+text = "home"
+
+[node name="score" type="Node2D" parent="."]
+pause_mode = 2
+z_index = 10
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="score"]
+modulate = Color( 0.101961, 0.117647, 0.133333, 0.941176 )
+scale = Vector2( 13.9903, 13.9903 )
+texture = ExtResource( 3 )
+
+[node name="test" type="Node2D" parent="score"]
+editor/display_folded = true
+position = Vector2( -63.0001, 130 )
+scale = Vector2( 1.86145, 1.86145 )
+
+[node name="you" type="Label" parent="score/test"]
+margin_left = -79.0001
+margin_top = -171.0
+margin_right = 173.0
+margin_bottom = -113.0
+text = "ada wins"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="buttons" type="Node2D" parent="score"]
+
+[node name="restart" type="Button" parent="score/buttons"]
+margin_left = -56.0
+margin_top = -39.4629
+margin_right = 73.0
+margin_bottom = -0.462936
+text = "restart"
+
+[node name="home" type="Button" parent="score/buttons"]
+margin_left = -56.0
+margin_top = 13.9281
+margin_right = 73.0
+margin_bottom = 52.9281
+text = "restart"
+[connection signal="pressed" from="background/home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="score/buttons/restart" to="score" method="_on_restart_pressed"]
+[connection signal="pressed" from="score/buttons/home" to="score" method="_on_home_pressed"]
